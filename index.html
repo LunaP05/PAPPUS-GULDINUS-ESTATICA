@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 465px;
+    height: 244px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    max-width: 440px;
+    max-height: 230px;
+  }
+</style>
+</head>
+<body>
+
+<svg viewBox="0 0 300 180">
+  <!-- Eje de revolución vertical central -->
+  <line x1="150" y1="20" x2="150" y2="160" stroke="#264d28" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="156" y="30" font-size="11" font-weight="bold" fill="#264d28">Eje</text>
+
+  <!-- Órbita de revolución (Superficie / Volumen generado al girar) -->
+  <ellipse cx="150" cy="90" rx="75" ry="32" fill="#e8f3e1" stroke="#4d8c4a" stroke-width="2" stroke-dasharray="4,4"/>
+
+  <!-- Perfil original que gira (arco lateral) -->
+  <path d="M 120 60 Q 140 90 120 120" fill="none" stroke="#264d28" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Radio al centroide (ȳ) -->
+  <line x1="150" y1="90" x2="128" y2="90" stroke="#e11d48" stroke-width="1.5"/>
+  <circle cx="128" cy="90" r="4" fill="#e11d48"/>
+  <text x="133" y="85" font-size="11" font-weight="bold" fill="#e11d48">ȳ</text>
+
+  <!-- Flechas curvas indicando el giro de revolución -->
+  <path d="M 85 75 A 75 25 0 0 1 115 65" fill="none" stroke="#4d8c4a" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 215 105 A 75 25 0 0 1 185 115" fill="none" stroke="#4d8c4a" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>
+
+<script>
+  // Animación suave opcional para el óvalo de revolución
+  const orbita = document.querySelector('ellipse');
+  let t = 0;
+  function animarPappus() {
+    t += 0.03;
+    const radioX = 75 + Math.sin(t) * 4;
+    orbita.setAttribute('rx', radioX);
+    requestAnimationFrame(animarPappus);
+  }
+  animarPappus();
+</script>
+</body>
+</html>
